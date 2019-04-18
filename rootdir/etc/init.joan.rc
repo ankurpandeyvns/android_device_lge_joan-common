@@ -351,6 +351,14 @@ on boot
    chown system system /sys/devices/virtual/input/lge_fingerprint/device_prepare
    chmod 0660 /sys/devices/virtual/input/lge_fingerprint/device_prepare
 
+# DAC control
+   chmod 0660 /sys/devices/soc/c175000.i2c/i2c-1/1-0048/headset_type
+   chmod 0660 /sys/devices/soc/c175000.i2c/i2c-1/1-0048/avc_volume
+   chmod 0660 /sys/devices/soc/c175000.i2c/i2c-1/1-0048/ess_filter
+   chown system system /sys/devices/soc/c175000.i2c/i2c-1/1-0048/headset_type
+   chown system system /sys/devices/soc/c175000.i2c/i2c-1/1-0048/avc_volume
+   chown system system /sys/devices/soc/c175000.i2c/i2c-1/1-0048/ess_filter
+
 #for Dynamic Resolution Switching
   chmod 644 /sys/class/graphics/fb0/mode
   chmod 644 /sys/class/graphics/fb0/modes
@@ -1107,6 +1115,12 @@ service sensor-sh /vendor/bin/init.qcom.sensors.sh
     user root
     oneshot
 
+service qcom-post-boot /vendor/bin/init.qcom.post_boot.sh
+    class late_start
+    user root
+    disabled
+    oneshot
+
 service vendor.joan-power /vendor/bin/init.joan.power.sh
     class main
     user root
@@ -1178,6 +1192,7 @@ on property:sys.qbcharger.enable=false
     stop qbcharger
 
 on charger
+    write /sys/module/lpm_levels/parameters/sleep_disabled N
     setprop persist.sys.usb.config mass_storage
     load_system_props
     start qcom-post-boot

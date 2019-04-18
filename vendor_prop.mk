@@ -35,6 +35,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.fm.a2dp.conc.disabled=true \
     vendor.voice.path.for.pcm.voip=true
 
+# Audio - DAC
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.audio.hifi_adv_support=1
+
 # Battery
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cutoff_voltage_mv=3400
@@ -113,7 +117,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Security Patch Level
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.security_patch=2018-11-01
+    ro.vendor.build.security_patch=2019-01-01
 
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -132,10 +136,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.usb.ffs.aio_compat=1 \
     persist.sys.usb.config.extra=none
-
-# Vibration
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.immvibed.fakeandrvers=8
 
 # Voice assistant
 PRODUCT_PROPERTY_OVERRIDES += \
